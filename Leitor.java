@@ -1,5 +1,5 @@
 /*
- *	Classe que È respons·vel pela leitura do arquivo.  
+ *	Classe que √© respons√°vel pela leitura do arquivo.
  */
 
 import java.util.ArrayList;
@@ -16,14 +16,14 @@ public class Leitor{
 		this.palavras = new ArrayList<String>();
 		this.palavraByRepeat = new ArrayList<String>();
 	}
- 
+
 	public void setPalavras(ArrayList<String> palavras){
 		this.palavras = palavras;
 	}
 
 	public ArrayList<String> getPalavras(){
 		return this.palavras;
-	}	
+	}
 
 	public void setCountPalavra(int countPalavra){
 		this.countPalavra = countPalavra;
@@ -36,7 +36,7 @@ public class Leitor{
 	public String[] getTotalPalavras(){
 		return this.totalPalavras;
 	}
-	
+
 	public void setTotalPalavras(String [] totalPalavras){
 		this.totalPalavras = totalPalavras;
 	}
@@ -47,8 +47,8 @@ public class Leitor{
 
 	public void setPalavraByRepeat(ArrayList<String> palavraByRepeat) {
 		this.palavraByRepeat = palavraByRepeat;
-	}	
-	
+	}
+
 	public Palavra [] getTotalPalavrasOcorrencia() {
 		return totalPalavrasOcorrencia;
 	}
@@ -56,23 +56,23 @@ public class Leitor{
 	public void setTotalPalavrasOcorrencia(Palavra [] totalPalavrasOcorrencia) {
 		this.totalPalavrasOcorrencia = totalPalavrasOcorrencia;
 	}
-	
+
 	public void openFileMethod1(String caminho) throws IOException{
 		InputStream fileByte = new FileInputStream(caminho);
 		InputStreamReader fileChar = new InputStreamReader(fileByte);
 		BufferedReader buffer = new BufferedReader(fileChar);
 
-		String aux = buffer.readLine();	
-		
-		while (aux != null){ 
+		String aux = buffer.readLine();
+
+		while (aux != null){
 			String [] tmp = aux.split("[ ,.!;:?]");
 			for (int i = 0 ; i<tmp.length ; i++ ) {
 				if( tmp[i].length() >= 4 ) {
 					this.palavras.add(tmp[i]);
 				}
 			}
-			
-			aux = buffer.readLine();			
+
+			aux = buffer.readLine();
 		}
 
 		buffer.close();
@@ -80,13 +80,13 @@ public class Leitor{
 		System.out.println("Buffer Carregado!");
 		transferListToArray();
 	}
-		
+
 	public void openFileMethod2(String caminho) throws IOException{
 		InputStream fileByte = new FileInputStream(caminho);
 		InputStreamReader fileChar = new InputStreamReader(fileByte);
 		BufferedReader buffer = new BufferedReader(fileChar);
 
-		String aux = buffer.readLine();	
+		String aux = buffer.readLine();
 
 		while (aux != null){
 			String [] tmp = aux.split("[ ,-.!;:?]");
@@ -94,10 +94,10 @@ public class Leitor{
 				if(!(this.palavras.contains(tmp[i]))) {
 					this.palavras.add(tmp[i]);
 				}
-				
+
 				this.palavraByRepeat.add(tmp[i]);
 			}
-			aux = buffer.readLine();	
+			aux = buffer.readLine();
 		}
 
 		buffer.close();
@@ -106,30 +106,30 @@ public class Leitor{
 	}
 
 	public void transferListToArray(){
-		int i = 0;		
+		int i = 0;
 		this.totalPalavras = new String[this.countPalavra];
-		
+
 		for(String str : this.palavras) {
 			this.totalPalavras[i] = str;
 			i++;
 		}
-		
+
 		System.out.println("Vetor Carregado!");
-		
+
 		this.palavras.clear();
-		this.palavras = null;	
+		this.palavras = null;
 	}
-	
+
 	public void transferCountingToArray() {
 		int i = 0;
-		this.totalPalavrasOcorrencia = new Palavra[this.countPalavra]; 
-		
+		this.totalPalavrasOcorrencia = new Palavra[this.countPalavra];
+
 		for(String str : this.palavras) {
 			Palavra palavra = new Palavra(str);
 			this.totalPalavrasOcorrencia[i] = palavra;
 			i++;
 		}
-		
+
 		for (Palavra palavra : this.totalPalavrasOcorrencia) {
 			for (String string : palavraByRepeat) {
 				if(palavra.getPalavra().equals(string)) {
