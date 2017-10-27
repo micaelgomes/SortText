@@ -57,7 +57,7 @@ public class Ordenar{
 				leitor.setTotalPalavras(Algoritmo.mergeSort(leitor.getTotalPalavras()));
 				break;
 			case "CountSort" :
-				System.out.println("nao implementado!");
+				//Teste.countingSort(leitor.getTotalPalavras(), leitor);
 				break;
 			case "ShellSort" :
 				Algoritmo.shellSort(leitor.getTotalPalavras());

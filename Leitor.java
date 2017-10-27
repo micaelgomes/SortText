@@ -33,7 +33,7 @@ public class Leitor{
 		return this.countPalavra;
 	}
 
-	public String[] getTotalPalavras(){
+		public String[] getTotalPalavras(){
 		return this.totalPalavras;
 	}
 
