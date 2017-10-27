@@ -23,7 +23,7 @@ public class Ordenar{
 				method2(arg[0]);
 				break;
 			default :
-				System.err.printf("Algoritmo de Ordena��o Inv�lido!\n");
+				System.err.printf("Metodo Invalido!\n");
 		}
 
 		long endTime = System.currentTimeMillis();
@@ -57,17 +57,17 @@ public class Ordenar{
 				leitor.setTotalPalavras(Algoritmo.mergeSort(leitor.getTotalPalavras()));
 				break;
 			case "CountSort" :
-				System.out.println("n�o implementado!");
+				System.out.println("nao implementado!");
 				break;
 			case "ShellSort" :
 				Algoritmo.shellSort(leitor.getTotalPalavras());
 				break;
 			default:
-				System.err.printf("Algoritmo de Ordena��o Inv�lido!\n");
+				System.err.printf("Algoritmo de Ordenacaoo Invalido!\n");
 		}
 
 		//imprimir(leitor.getTotalPalavras());
-		System.out.println("n�mero de palavras : " + leitor.getTotalPalavras().length);
+		System.out.println("numero de palavras : " + leitor.getTotalPalavras().length);
 
 	}
 
