@@ -1,6 +1,6 @@
 /**
  *
- * Projeto referente � cardeira de Estrutura de Dados II;
+ * Projeto referente à cardeira de Estrutura de Dados II;
  * Objetivo consiste em ordenar textos com os algoritmos lecionados;
  *
  * @author ${Micael Gomes, Leonardo Alves}
