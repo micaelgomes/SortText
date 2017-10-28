@@ -14,10 +14,10 @@ import java.util.ArrayList;
 
 public class Ordenar{
 	public static void main(String[] arg) {
-		long initialTime = System.currentTimeMillis();
+		//long initialTime = System.currentTimeMillis();
 		switch(arg[1]) {
 			case "metodo1" :
-				method1(arg[0]);
+				method1(arg[0], arg[2]);
 				break;
 			case "metodo2" :
 				method2(arg[0]);
@@ -26,15 +26,15 @@ public class Ordenar{
 				System.err.printf("Metodo Invalido!\n");
 		}
 
-		long endTime = System.currentTimeMillis();
-		System.out.println("Tempo total em segundos: " + (endTime - initialTime)/1000);
+		//long endTime = System.currentTimeMillis();
+		//System.out.println("Tempo total em segundos: " + (endTime - initialTime)/1000);
 	}
 
-	public static void method1(String algoritmo){
+	public static void method1(String algoritmo, String caminho){
 		Leitor leitor = new Leitor();
 
 		try{
-			leitor.openFileMethod1("C:\\Users\\micae\\eclipse-workspace\\SortText\\bin\\primeiro.txt");
+			leitor.openFileMethod1(caminho);
 		}catch(IOException e){
 			System.err.printf("Erro na abertura do arquivo: %s.\n",
           	e.getMessage());
@@ -63,11 +63,11 @@ public class Ordenar{
 				Algoritmo.shellSort(leitor.getTotalPalavras());
 				break;
 			default:
-				System.err.printf("Algoritmo de Ordenacaoo Invalido!\n");
+				System.err.printf("Algoritmo de Ordenacao Invalido!\n");
 		}
 
-		//imprimir(leitor.getTotalPalavras());
-		System.out.println("numero de palavras : " + leitor.getTotalPalavras().length);
+		imprimir(leitor.getTotalPalavras());
+		System.out.println("numero de palavras : " + leitor.getCountPalavra());
 
 	}
 
@@ -75,7 +75,7 @@ public class Ordenar{
 		Leitor leitor = new Leitor();
 
 		try{
-			leitor.openFileMethod2("C:\\Users\\micae\\eclipse-workspace\\SortText\\bin\\quarto.txt");
+			leitor.openFileMethod2("");
 		}catch(IOException e){
 			System.err.printf("Erro na abertura do arquivo: %s.\n",
           	e.getMessage());

@@ -107,8 +107,9 @@ public class Leitor{
 
 	public void transferListToArray(){
 		int i = 0;
+		System.out.println("To aqui");
 		this.totalPalavras = new String[this.countPalavra];
-
+		System.out.println("entrei");
 		for(String str : this.palavras) {
 			this.totalPalavras[i] = str;
 			i++;

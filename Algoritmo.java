@@ -1,204 +1,204 @@
 /*
- *	Classe que contém os Algoritmos de Ordenação do projeto.  
+ *	Classe que contï¿½m os Algoritmos de Ordenaï¿½ï¿½o do projeto.
  */
 
-public class Algoritmo{
-	//insertSTART
-	public static void insertSort(String a []) {   
-        int i,j;  String x;
+ public class Algoritmo{
+ //insertSTART
+ public static void insertSort(String a []) {
+ 	int i,j; String x;
 
-        for (j = 1; j < a.length; j++) {       
-            x = a[j]; i = j - 1;
+ 	for (j = 1; j < a.length; j++) {
+ 		x = a[j];
+ 		i = j-1;
 
-            while (i >= 0) {
-                if (x.compareTo(a[i]) > 0) {
-                    break;
-                }
-                a[i + 1] = a[i];
-                i--;
-            }
-            a[i + 1] = x;
-        }
-	}
-	//insertEND
-	
-	//selectSTART
-	public static void selectSort(String a []) {
-	    for (int i = 0; i < a.length - 1; ++i) {
-	      int minIndex = i;
-	      for (int j = i + 1; j < a.length; ++j){
-	    	  if (a[j].compareTo(a[minIndex]) < 0){
-	    		  minIndex = j;
-	    	  }
-	      }
-	      
-	      String temp = a[i];
-	      a[i] = a[minIndex];
-	      a[minIndex] = temp;
-	    }
-	}
-	//selectEND
-	
-	//heapSTART
-	public static void ordenarHeap(String[] v) {
-	    constroiMaximaOrdem(v);
-	    int n = v.length;
-	
-	    for (int i = v.length - 1; i > 0; i--) {
-	        swap(v, i, 0);
-	        ordenaDescendo(v, 0, --n);
-	    }
-	}
+ 		while (i >= 0) {
+ 			if (x.substring(0,3).compareTo(a[i].substring(0,3)) > 0) {
+ 				break;
+ 			}
+ 			a[i+1] = a[i];
+ 			i--;
+ 		}
+ 		a[i+1] = x;
+ 	}
+ }
+ //insertEND
+ //selectSTART
+ public static void selectSort(String a []) {
+ 	for (int i = 0; i < a.length - 1; ++i) {
+ 		int minIndex = i;
+ 		for (int j = i + 1; j < a.length; ++j){
+ 			if (a[j].substring(0, 3).compareTo(a[minIndex].substring(0, 3)) < 0){
+ 				minIndex = j;
+ 			}
+ 		}
 
-	private static void constroiMaximaOrdem(String[] v) {
-	    for (int i = v.length / 2 - 1; i >= 0; i--)
-	        ordenaDescendo(v, i, v.length);
-	}
+ 		String temp = a[i];
+ 		a[i] = a[minIndex];
+ 		a[minIndex] = temp;
+ 	}
+ }
+ //selectEND
 
-	private static void ordenaDescendo(String[] vetor, int pos, int tamanhoDoVetor) {
-	    int max = 2 * pos + 1, right = max + 1;
-	    if (max < tamanhoDoVetor) {
-	        if ((right < tamanhoDoVetor) && (vetor[max].compareTo(vetor[right])) < 0)
-	            max = right;
-	        if (vetor[max].compareTo(vetor[pos]) > 0) {
-	            swap(vetor, max, pos);
-	            ordenaDescendo(vetor, max, tamanhoDoVetor);
-	        }
-	    }
-	}
+ //heapSTART
+ public static void ordenarHeap(String[] v) {
+ 	constroiMaximaOrdem(v);
+ 	int n = v.length;
 
-	public static void swap(String[] v, int j, int aposJ) {
-	    String aux = v[j];
-	    v[j] = v[aposJ];
-	    v[aposJ] = aux;
-	}
-	//heapEND
-	
-	//mergeSTART
-	public static String [] mergeSort(String[] list) {
-        String [] sorted = new String[list.length];
-        if (list.length == 1) {
-            sorted = list;
-        } else {
-            int mid = list.length/2;
-            String[] left = null; 
-            String[] right = null;
-            if ((list.length % 2) == 0) {
-                left = new String[list.length/2];
-                right = new String[list.length/2];
-            } else { 
-                left = new String[list.length/2];
-                right = new String[(list.length/2)+1];
-            }
-            int x=0;
-            int y=0;
-            for ( ; x < mid; x++) {
-                left[x] = list[x];
-            }
-            for ( ; x < list.length; x++) {
-                right[y++] = list[x];
-            }
-            left = mergeSort(left);
-            right = mergeSort(right);
-            sorted = mergeArray(left,right);
-        }
+ 	for (int i = v.length - 1; i > 0; i--) {
+ 		swap(v, i, 0);
+ 		ordenaDescendo(v, 0, --n);
+ 	}
+ }
 
-        return sorted;
-    }
+ private static void constroiMaximaOrdem(String[] v) {
+ 	for (int i = v.length / 2 - 1; i >= 0; i--)
+ 		ordenaDescendo(v, i, v.length);
+ }
 
-    private static String[] mergeArray(String[] left, String[] right) {
-        String[] merged = new String[left.length+right.length];
-        int lIndex = 0;
-        int rIndex = 0;
-        int mIndex = 0;
-        int comp = 0;
-        while (lIndex < left.length || rIndex < right.length) {
-            if (lIndex == left.length) {
-                merged[mIndex++] = right[rIndex++];
-            } else if (rIndex == right.length) {
-                merged[mIndex++] = left[lIndex++];
-            } else {  
-                comp = left[lIndex].compareTo(right[rIndex]);
-                if (comp > 0) {
-                    merged[mIndex++] = right[rIndex++];
-                } else if (comp < 0) {
-                    merged[mIndex++] = left[lIndex++];
-                } else { 
-                    merged[mIndex++] = left[lIndex++];
-                }
-            }   
-        }
-        return merged;
-    }
-    //mergeEND
-    
-    //quickSTART
-    public static void qsort(String[] list) {
-      quicksort(list, 0, list.length-1);
-    }
+ private static void ordenaDescendo(String[] vetor, int pos, int tamanhoDoVetor) {
+ 	int max = 2 * pos + 1, right = max + 1;
+ 	if (max < tamanhoDoVetor) {
+ 		if ((right < tamanhoDoVetor) && (vetor[max].substring(0, 3).compareTo(vetor[right].substring(0, 3))) < 0)
+ 			max = right;
+ 		if (vetor[max].substring(0, 3).compareTo(vetor[pos].substring(0, 3)) > 0) {
+ 			swap(vetor, max, pos);
+ 			ordenaDescendo(vetor, max, tamanhoDoVetor);
+ 		}
+ 	}
+ }
 
-    private static void quicksort(String[] list, int p, int r) {
-      if (p < r) {
-        int q = partition(list,p,r);
-        if (q == r) {
-      q--;
-        }
-        quicksort(list,p,q);
-        quicksort(list,q+1,r);
-      }
-    }
+ public static void swap(String[] v, int j, int aposJ) {
+ 	String aux = v[j];
+ 	v[j] = v[aposJ];
+ 	v[aposJ] = aux;
+ }
+ //heapEND
 
-    private static int partition (String[] list, int p, int r) {
-      String pivot = list[p];
-      int lo = p;
-      int hi = r;
+ //mergeSTART
+ public static String [] mergeSort(String[] list) {
+ 	String [] sorted = new String[list.length];
+ 	if (list.length == 1) {
+ 		sorted = list;
+ 	} else {
+ 		int mid = list.length/2;
+ 		String[] left = null;
+ 		String[] right = null;
+ 		if ((list.length % 2) == 0) {
+ 			left = new String[list.length/2];
+ 			right = new String[list.length/2];
+ 		} else {
+ 			left = new String[list.length/2];
+ 			right = new String[(list.length/2)+1];
+ 		}
+ 		int x=0;
+ 		int y=0;
+ 		for ( ; x < mid; x++) {
+ 			left[x] = list[x];
+ 		}
+ 		for ( ; x < list.length; x++) {
+ 			right[y++] = list[x];
+ 		}
+ 		left = mergeSort(left);
+ 		right = mergeSort(right);
+ 		sorted = mergeArray(left,right);
+ 	}
 
-      while (true) {
-        while (list[hi].compareTo(pivot) >= 0 &&
-           lo < hi) {
-      hi--;
-        }
-        while (list[lo].compareTo(pivot) < 0 &&
-           lo < hi) {
-      lo++;
-        }
-        if (lo < hi) {
-      String T = list[lo];
-      list[lo] = list[hi];
-      list[hi] = T;
-        }
-        else return hi;
-      }
-    }    
-    //quickEND
-    
-    //shellSTART
-    public static void shellSort(String[] v) {  
-        int i , j , h = 1;
-        String value;
-        
-        do {
-            h = 3 * h + 1;
-           
-        } while ( h < v.length );
-        
-        do {
-            h = h / 3;
-            
-            for( i = h; i < v.length; i++) {
-               
-                value = v[i];
-                j = i - h;
-               
-                while (j >= 0 && v[j].compareTo(value) > 0) {
-                    v [ j + h ] = v [ j ];
-                    j = j - h;
-                }
-                
-                v [ j + h ] = value;
-            }
-        } while ( h > 1 );
-       
-    }
-    //shellEND
-}
+ 	return sorted;
+ }
+
+ private static String[] mergeArray(String[] left, String[] right) {
+ 	String[] merged = new String[left.length+right.length];
+ 	int lIndex = 0;
+ 	int rIndex = 0;
+ 	int mIndex = 0;
+ 	int comp = 0;
+ 	while (lIndex < left.length || rIndex < right.length) {
+ 		if (lIndex == left.length) {
+ 			merged[mIndex++] = right[rIndex++];
+ 		} else if (rIndex == right.length) {
+ 			merged[mIndex++] = left[lIndex++];
+ 		} else {
+ 			comp = left[lIndex].substring(0, 3).compareTo(right[rIndex].substring(0, 3));
+ 			if (comp > 0) {
+ 				merged[mIndex++] = right[rIndex++];
+ 			} else if (comp < 0) {
+ 				merged[mIndex++] = left[lIndex++];
+ 			} else {
+ 				merged[mIndex++] = left[lIndex++];
+ 			}
+ 		}
+ 	}
+ 	return merged;
+ }
+ //mergeEND
+
+ //quickSTART
+ public static void qsort(String[] list) {
+ 	quicksort(list, 0, list.length-1);
+ }
+
+ private static void quicksort(String[] list, int p, int r) {
+ 	if (p < r) {
+ 	int q = partition(list,p,r);
+ 	if (q == r) {
+ 	q--;
+ 	}
+ 	quicksort(list,p,q);
+ 	quicksort(list,q+1,r);
+ 	}
+ }
+
+ private static int partition (String[] list, int p, int r) {
+ 	String pivot = list[p];
+ 	int lo = p;
+ 	int hi = r;
+
+ 	while (true) {
+ 	while (list[hi].substring(0, 3).compareTo(pivot.substring(0, 3)) >= 0 &&
+ 		lo < hi) {
+ 	hi--;
+ 	}
+ 	while (list[lo].substring(0, 3).compareTo(pivot.substring(0,3)) < 0 &&
+ 		lo < hi) {
+ 	lo++;
+ 	}
+ 	if (lo < hi) {
+ 	String T = list[lo];
+ 	list[lo] = list[hi];
+ 	list[hi] = T;
+ 	}
+ 	else return hi;
+ 	}
+ }
+ //quickEND
+
+ //shellSTART
+ public static void shellSort(String[] v) {
+ 	int i , j , h = 1;
+ 	String value;
+
+ 	do {
+ 		h = 3 * h + 1;
+
+ 	} while ( h < v.length );
+
+ 	do {
+ 		h = h / 3;
+
+ 		for( i = h; i < v.length; i++) {
+
+ 			value = v[i];
+ 			j = i - h;
+
+ 			while (j >= 0 && v[j].substring(0, 3).compareTo(value.substring(0, 3)) > 0) {
+ 				v [ j + h ] = v [ j ];
+ 				j = j - h;
+ 			}
+
+ 			v [ j + h ] = value;
+ 		}
+ 	} while ( h > 1 );
+
+ }
+ //shellEND
+ }
