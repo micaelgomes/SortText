@@ -6,133 +6,91 @@ import java.util.ArrayList;
 import java.io.*;
 
 public class Leitor{
-	private ArrayList<String> palavras;
-	private String [] totalPalavras;
-	private int countPalavra;
-	private ArrayList<String> palavraByRepeat;
-	private Palavra [] totalPalavrasOcorrencia;
+	private ArrayList<String> listaTmpPalavra = new ArrayList<String>();
+	private ArrayList<String> listaTmpPalavraTotal = new ArrayList<String>();
+	private String [] palavras;
+	private Palavra [] palavrasOcorrencia;
 
-	Leitor(){
-		this.palavras = new ArrayList<String>();
-		this.palavraByRepeat = new ArrayList<String>();
-	}
+	Leitor(){}
 
-	public void setPalavras(ArrayList<String> palavras){
+	public void setPalavras(String [] palavras){
 		this.palavras = palavras;
 	}
 
-	public ArrayList<String> getPalavras(){
+	public String [] getPalavras(){
 		return this.palavras;
 	}
 
-	public void setCountPalavra(int countPalavra){
-		this.countPalavra = countPalavra;
+	public void setPalavrasOcorrencia(Palavra [] palavrasOcorrencia){
+		this.palavrasOcorrencia = palavrasOcorrencia;
 	}
 
-	public int getCountPalavra(){
-		return this.countPalavra;
-	}
-
-		public String[] getTotalPalavras(){
-		return this.totalPalavras;
-	}
-
-	public void setTotalPalavras(String [] totalPalavras){
-		this.totalPalavras = totalPalavras;
-	}
-
-	public ArrayList<String> getPalavraByRepeat() {
-		return this.palavraByRepeat;
-	}
-
-	public void setPalavraByRepeat(ArrayList<String> palavraByRepeat) {
-		this.palavraByRepeat = palavraByRepeat;
-	}
-
-	public Palavra [] getTotalPalavrasOcorrencia() {
-		return totalPalavrasOcorrencia;
-	}
-
-	public void setTotalPalavrasOcorrencia(Palavra [] totalPalavrasOcorrencia) {
-		this.totalPalavrasOcorrencia = totalPalavrasOcorrencia;
+	public Palavra [] getPalavrasOcorrencia(){
+		return this.palavrasOcorrencia;
 	}
 
 	public void openFileMethod1(String caminho) throws IOException{
-		InputStream fileByte = new FileInputStream(caminho);
-		InputStreamReader fileChar = new InputStreamReader(fileByte);
-		BufferedReader buffer = new BufferedReader(fileChar);
-
-		String aux = buffer.readLine();
+		BufferedReader buffRead = new BufferedReader(new FileReader(caminho));
+		String aux = buffRead.readLine();
 
 		while (aux != null){
 			String [] tmp = aux.split("[ ,.!;:?]");
-			for (int i = 0 ; i<tmp.length ; i++ ) {
-				if( tmp[i].length() >= 4 ) {
-					this.palavras.add(tmp[i]);
+			for ( String str : tmp ) {
+				if(str.length() >= 4){
+					this.listaTmpPalavra.add(str);
 				}
 			}
-
-			aux = buffer.readLine();
+			aux = buffRead.readLine();
 		}
 
-		buffer.close();
-		this.countPalavra = this.palavras.size();
+		buffRead.close();
 		System.out.println("Buffer Carregado!");
-		transferListToArray();
+		listToArray();
+		System.out.println("Vetor Carregado!");
+	}
+
+	public void listToArray(){
+		this.palavras = new String[this.listaTmpPalavra.size()];
+		int i = 0;
+		for (String str : this.listaTmpPalavra) {
+			this.palavras[i] = str;
+			i++;
+		}
 	}
 
 	public void openFileMethod2(String caminho) throws IOException{
-		InputStream fileByte = new FileInputStream(caminho);
-		InputStreamReader fileChar = new InputStreamReader(fileByte);
-		BufferedReader buffer = new BufferedReader(fileChar);
-
-		String aux = buffer.readLine();
+		BufferedReader buffRead = new BufferedReader(new FileReader(caminho));
+		String aux = buffRead.readLine();
 
 		while (aux != null){
-			String [] tmp = aux.split("[ ,-.!;:?]");
-			for (int i = 0 ; i<tmp.length ; i++ ) {
-				if(!(this.palavras.contains(tmp[i]))) {
-					this.palavras.add(tmp[i]);
+			String [] tmp = aux.split("[ ,.!;:?]");
+			for ( String str : tmp ) {
+				if(!(this.listaTmpPalavra.contains(str))){
+					this.listaTmpPalavra.add(str);
 				}
-
-				this.palavraByRepeat.add(tmp[i]);
+				this.listaTmpPalavraTotal.add(str);
 			}
-			aux = buffer.readLine();
+			aux = buffRead.readLine();
 		}
 
-		buffer.close();
-		this.countPalavra = this.palavras.size();
+		buffRead.close();
+		System.out.println("Buffer Carregado!");
 		transferCountingToArray();
-	}
-
-	public void transferListToArray(){
-		int i = 0;
-		System.out.println("To aqui");
-		this.totalPalavras = new String[this.countPalavra];
-		System.out.println("entrei");
-		for(String str : this.palavras) {
-			this.totalPalavras[i] = str;
-			i++;
-		}
-
 		System.out.println("Vetor Carregado!");
-
-		this.palavras.clear();
-		this.palavras = null;
 	}
 
 	public void transferCountingToArray() {
 		int i = 0;
-		this.totalPalavrasOcorrencia = new Palavra[this.countPalavra];
+		this.palavrasOcorrencia = new Palavra[this.listaTmpPalavra.size()];
 
-		for(String str : this.palavras) {
+		for(String str : this.listaTmpPalavra) {
 			Palavra palavra = new Palavra(str);
-			this.totalPalavrasOcorrencia[i] = palavra;
+			this.palavrasOcorrencia[i] = palavra;
 			i++;
 		}
 
-		for (Palavra palavra : this.totalPalavrasOcorrencia) {
-			for (String string : palavraByRepeat) {
+		for (Palavra palavra : this.palavrasOcorrencia) {
+			for (String string : listaTmpPalavraTotal) {
 				if(palavra.getPalavra().equals(string)) {
 					palavra.incrementaOcorrencia();
 				}

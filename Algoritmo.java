@@ -3,23 +3,19 @@
  */
 
  public class Algoritmo{
+
  //insertSTART
- public static void insertSort(String a []) {
- 	int i,j; String x;
-
- 	for (j = 1; j < a.length; j++) {
- 		x = a[j];
- 		i = j-1;
-
- 		while (i >= 0) {
- 			if (x.substring(0,3).compareTo(a[i].substring(0,3)) > 0) {
- 				break;
- 			}
- 			a[i+1] = a[i];
- 			i--;
- 		}
- 		a[i+1] = x;
- 	}
+ public static void insertSort(String [] array) {
+        String temp;
+         for (int i = 1; i < array.length ; i++) {
+             for(int j = i ; j > 0 ; j--){
+                 if(array[j].substring(0, 2).compareTo(array[j-1].substring(0, 2)) < 0){
+                     temp = array[j];
+                     array[j] = array[j-1];
+                     array[j-1] = temp;
+                 }
+             }
+         }
  }
  //insertEND
  //selectSTART
@@ -27,7 +23,7 @@
  	for (int i = 0; i < a.length - 1; ++i) {
  		int minIndex = i;
  		for (int j = i + 1; j < a.length; ++j){
- 			if (a[j].substring(0, 3).compareTo(a[minIndex].substring(0, 3)) < 0){
+ 			if (a[j].substring(0, 2).compareTo(a[minIndex].substring(0, 2)) < 0){
  				minIndex = j;
  			}
  		}
@@ -58,9 +54,9 @@
  private static void ordenaDescendo(String[] vetor, int pos, int tamanhoDoVetor) {
  	int max = 2 * pos + 1, right = max + 1;
  	if (max < tamanhoDoVetor) {
- 		if ((right < tamanhoDoVetor) && (vetor[max].substring(0, 3).compareTo(vetor[right].substring(0, 3))) < 0)
+ 		if ((right < tamanhoDoVetor) && (vetor[max].substring(0, 2).compareTo(vetor[right].substring(0, 2))) < 0)
  			max = right;
- 		if (vetor[max].substring(0, 3).compareTo(vetor[pos].substring(0, 3)) > 0) {
+ 		if (vetor[max].substring(0, 2).compareTo(vetor[pos].substring(0, 2)) > 0) {
  			swap(vetor, max, pos);
  			ordenaDescendo(vetor, max, tamanhoDoVetor);
  		}
@@ -118,7 +114,7 @@
  		} else if (rIndex == right.length) {
  			merged[mIndex++] = left[lIndex++];
  		} else {
- 			comp = left[lIndex].substring(0, 3).compareTo(right[rIndex].substring(0, 3));
+ 			comp = left[lIndex].substring(0, 2).compareTo(right[rIndex].substring(0, 2));
  			if (comp > 0) {
  				merged[mIndex++] = right[rIndex++];
  			} else if (comp < 0) {
@@ -154,11 +150,11 @@
  	int hi = r;
 
  	while (true) {
- 	while (list[hi].substring(0, 3).compareTo(pivot.substring(0, 3)) >= 0 &&
+ 	while (list[hi].substring(0, 2).compareTo(pivot.substring(0, 2)) >= 0 &&
  		lo < hi) {
  	hi--;
  	}
- 	while (list[lo].substring(0, 3).compareTo(pivot.substring(0,3)) < 0 &&
+ 	while (list[lo].substring(0, 2).compareTo(pivot.substring(0,2)) < 0 &&
  		lo < hi) {
  	lo++;
  	}
@@ -190,7 +186,7 @@
  			value = v[i];
  			j = i - h;
 
- 			while (j >= 0 && v[j].substring(0, 3).compareTo(value.substring(0, 3)) > 0) {
+ 			while (j >= 0 && v[j].substring(0, 2).compareTo(value.substring(0, 2)) > 0) {
  				v [ j + h ] = v [ j ];
  				j = j - h;
  			}
