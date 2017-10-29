@@ -106,9 +106,5 @@ public class Ordenar{
 			default:
 				System.err.printf("Algoritmo de Ordenacao Invalido!\n");
 		}
-
-		for (Palavra palavra : leitor.getPalavrasOcorrencia()) {
-			System.out.printf("%s repete : %d\n", palavra.getPalavra(), palavra.getNumOcorrencia());
-		}
 	}
 }
