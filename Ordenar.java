@@ -16,9 +16,15 @@ public class Ordenar{
 	public static void main(String[] arg) {
 		switch(arg[1]) {
 			case "metodo1" :
+				/*recebe como argumento o algoritmo de ordenação e o diretório do arquivo que será ordenado.
+				Faz a chamada da função que trará o arquivo para um buffer e executará a ordenação em cima
+				do arquivo na memória. */
 				method1(arg[0], arg[2]);
 				break;
 			case "metodo2" :
+				/* recebe como argumento o algoritmo de ordenação e o diretório do arquivo que será ordenado.
+				Faz a chamada da função que trará o arquivo para um buffer e executará a ordenação em cima
+				do arquivo na memória.*/
 				method2(arg[0], arg[2]);
 				break;
 			default :
@@ -83,14 +89,18 @@ public class Ordenar{
 				AlgoritmoNum.selectSort(leitor.getPalavrasOcorrencia());
 				break;
 			case "QuickSort" :
+				//AlgoritmoNum.quickSort(leitor.getPalavrasOcorrencia());
 				break;
 			case "HeapSort" :
+				leitor.AlgoritmoNum.heapSort(leitor.getPalavrasOcorrencia());
 				break;
 			case "MergeSort" :
 				break;
 			case "CountSort" :
+				leitor.setPalavrasOcorrencia(AlgoritmoNum.countSort(leitor.getPalavrasOcorrencia()));
 				break;
 			case "ShellSort" :
+				AlgoritmoNum.shellSort(leitor.getPalavrasOcorrencia());
 				break;
 			default:
 				System.err.printf("Algoritmo de Ordenacao Invalido!\n");

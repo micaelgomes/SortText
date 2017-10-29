@@ -173,7 +173,7 @@
  	int i , j , h = 1;
  	String value;
 
- 	do {
+    do {
  		h = 3 * h + 1;
 
  	} while ( h < v.length );
