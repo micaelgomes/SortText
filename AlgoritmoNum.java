@@ -109,7 +109,7 @@ public class AlgoritmoNum{
            heapify(arry, i, 0);
        }
    }
-   public static void heapify(int arr[], int n, int i) {
+   public static void heapify(Palavra [] arr, int n, int i) {
        int largest = i;
        int l = 2*i + 1;
        int r = 2*i + 2;
@@ -129,4 +129,106 @@ public class AlgoritmoNum{
        }
    }
     //heapEND
+
+    //mergeSTART
+    public static void merge(Palavra arr[], int l, int m, int r){
+       int n1 = m - l + 1;
+       int n2 = r - m;
+
+       Palavra L[] = new Palavra [n1];
+       Palavra R[] = new Palavra [n2];
+
+       for (int i=0; i<n1; ++i)
+           L[i] = arr[l + i];
+       for (int j=0; j<n2; ++j)
+           R[j] = arr[m + 1+ j];
+
+       int i = 0, j = 0;
+
+       int k = l;
+       while (i < n1 && j < n2){
+           if (L[i].getNumOcorrencia() <= R[j].getNumOcorrencia()){
+               arr[k] = L[i];
+               i++;
+           }
+           else{
+               arr[k] = R[j];
+               j++;
+           }
+           k++;
+       }
+
+       while (i < n1){
+           arr[k] = L[i];
+           i++;
+           k++;
+       }
+
+       while (j < n2){
+           arr[k] = R[j];
+           j++;
+           k++;
+       }
+   }
+
+   public static void sort(Palavra []arr, int l, int r){
+       if (l < r){
+           int m = (l+r)/2;
+           sort(arr, l, m);
+           sort(arr , m+1, r);
+           merge(arr, l, m, r);
+       }
+   }
+
+   public static void mergeSort(Palavra [] array){
+       sort(array, 0, array.length-1);
+   }
+    //mergeEND
+
+    //quickSTART
+    public static void sort(Palavra [] array) {
+        Palavra [] palavras;
+        int tam;
+
+        if (array ==null || array.length==0){
+            return;
+        }
+        palavras = array;
+        tam = array.length;
+        quicksort(0, tam - 1, palavras);
+    }
+
+    private static void quicksort(int low, int high, Palavra [] palavras) {
+        int i = low, j = high;
+
+        Palavra pivot = palavras[low + (high-low)/2];
+
+        while (i <= j) {
+            while (palavras[i].getNumOcorrencia() < pivot.getNumOcorrencia()) {
+                i++;
+            }
+
+            while (palavras[j].getNumOcorrencia() > pivot.getNumOcorrencia()) {
+                j--;
+            }
+
+            if (i <= j) {
+                exchange(i, j, palavras);
+                i++;
+                j--;
+            }
+        }
+
+        if (low < j)
+            quicksort(low, j, palavras);
+        if (i < high)
+            quicksort(i, high, palavras);
+    }
+
+    private static void exchange(int i, int j, Palavra [] palavras) {
+        Palavra temp = palavras[i];
+        palavras[i] = palavras[j];
+        palavras[j] = temp;
+    }
+    //quickEND
 }

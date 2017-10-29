@@ -89,12 +89,13 @@ public class Ordenar{
 				AlgoritmoNum.selectSort(leitor.getPalavrasOcorrencia());
 				break;
 			case "QuickSort" :
-				//AlgoritmoNum.quickSort(leitor.getPalavrasOcorrencia());
+				AlgoritmoNum.sort(leitor.getPalavrasOcorrencia());
 				break;
 			case "HeapSort" :
-				leitor.AlgoritmoNum.heapSort(leitor.getPalavrasOcorrencia());
+				AlgoritmoNum.heapSort(leitor.getPalavrasOcorrencia());
 				break;
 			case "MergeSort" :
+				AlgoritmoNum.mergeSort(leitor.getPalavrasOcorrencia());
 				break;
 			case "CountSort" :
 				leitor.setPalavrasOcorrencia(AlgoritmoNum.countSort(leitor.getPalavrasOcorrencia()));
